@@ -117,24 +117,7 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* Description */}
-        <p className="text-gray-400 max-w-2xl mx-auto mb-10 text-sm md:text-base leading-relaxed">
-          Join a community of innovators building real-world IoT systems,
-          participating in hackathons, workshops, and cutting-edge research
-          in Edge AI, Smart Systems, and Automation.
-        </p>
-
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
-          <button className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold shadow-lg shadow-blue-500/20 transition-all hover:scale-105 active:scale-95">
-            🚀 Join Now
-          </button>
-          <button className="px-10 py-4 border border-white/10 bg-white/5 hover:bg-white/10 text-white rounded-2xl font-bold backdrop-blur-sm transition-all hover:scale-105 active:scale-95">
-            Explore
-          </button>
-        </div>
-
-        {/* Mission Card */}
+       {/* Mission Card */}
         <div className="mt-16 w-full max-w-lg mx-auto p-[1px] rounded-3xl bg-gradient-to-br from-white/10 to-transparent">
           <div className="bg-slate-900/80 backdrop-blur-xl rounded-[23px] p-6 md:p-8 shadow-2xl border border-white/5">
             <h2 className="text-xl md:text-2xl font-bold text-blue-400 mb-3">Our Mission</h2>
@@ -144,6 +127,8 @@ export default function Hero() {
             </p>
           </div>
         </div>
+
+     
 
       </div>
 
