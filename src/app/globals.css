@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+html {
+  scroll-behavior: smooth;
+}
+@theme {
+  --color-iot-dark: #000000;
+  --color-iot-surface: #1E293B;
+  --color-iot-green: #0CAFFF;
+  --color-iot-green-dark: #0EA5E9;
+  --color-iot-green-deep: #1e3a8a;
+  --color-iot-light: #F8FAFC;
+  --color-iot-text: #0F172A;
+  --font-sans: 'Times New Roman', Times, serif;
+  --font-pixel: 'Times New Roman', Times, serif;
+  --animate-scroll: scroll 30s linear infinite;
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  --animate-blink: blink 1s step-end infinite;
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+}
+:root {
+  --background: var(--color-iot-light);
+  --foreground: var(--color-iot-text);
+  --card: #FFFFFF;
+  --accent: var(--color-iot-green);
+}
+[class~="dark"] {
+  --background: var(--color-iot-dark);
+  --foreground: #F8FAFC;
+  --card: var(--color-iot-surface);
+  --accent: var(--color-iot-green);
+}
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Times New Roman', Times, serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+/* Custom utility for that "IoT Glow" effect */
+.glow-green {
+  text-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+}
+.border-iot {
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
