@@ -97,7 +97,7 @@ export default function Hero() {
 
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-8 backdrop-blur-md">
-          <span className="w-2 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
           IoT Edge Club MITS
         </div>
 
@@ -145,10 +145,8 @@ export default function Hero() {
           </div>
         </div>
 
-
       </div>
 
-      {/* CUSTOM ANIMATIONS */}
       <style jsx>{`
         .animate-float { animation: float 6s ease-in-out infinite; }
         .delay-200 { animation-delay: 1.5s; }
