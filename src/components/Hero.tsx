@@ -117,16 +117,11 @@ export default function Hero() {
           </p>
         </div>
 
-       {/* Mission Card */}
-        <div className="mt-16 w-full max-w-lg mx-auto p-[1px] rounded-3xl bg-gradient-to-br from-white/10 to-transparent">
-          <div className="bg-slate-900/80 backdrop-blur-xl rounded-[23px] p-6 md:p-8 shadow-2xl border border-white/5">
-            <h2 className="text-xl md:text-2xl font-bold text-blue-400 mb-3">Our Mission</h2>
-            <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-              Empowering students through hands-on IoT projects, workshops,
-              and innovation in Edge Computing, AI, and Smart Systems.
-            </p>
-          </div>
-        </div>
+     <p className="text-gray-400 max-w-2xl mx-auto mb-10 text-sm md:text-base leading-relaxed">
+          Join a community of innovators building real-world IoT systems,
+          participating in hackathons, workshops, and cutting-edge research
+          in Edge AI, Smart Systems, and Automation.
+        </p>
 
      
 
