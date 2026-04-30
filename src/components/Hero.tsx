@@ -31,122 +31,138 @@ export default function Hero() {
     canvas.width = W;
     canvas.height = H;
 
-    const stars = Array.from({ length: 250 }, () => ({
+    const stars = Array.from({ length: 200 }, () => ({
       x: Math.random() * W,
       y: Math.random() * H,
-      r: Math.random() * 2,
-      d: Math.random() * 1,
+      r: Math.random() * 1.5,
+      d: Math.random() * 0.5 + 0.1,
+      o: Math.random(),
     }));
 
     function draw() {
       if (!ctx) return;
-
       ctx.fillStyle = "#020617";
       ctx.fillRect(0, 0, W, H);
 
-      ctx.fillStyle = "#fff";
       stars.forEach((s) => {
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.o})`;
         ctx.fill();
-
         s.y += s.d;
         if (s.y > H) s.y = 0;
       });
-
       requestAnimationFrame(draw);
     }
 
     draw();
+
+    const handleResize = () => {
+      if (!canvas) return;
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden mt-20">
+    <section className="relative min-h-screen md:min-h-[120vh] flex flex-col items-center justify-start overflow-hidden pt-40 pb-24">
 
       {/* Canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 z-0" />
 
-      {/* Glow */}
-      <div className="absolute inset-0 z-10">
-        <div className="absolute top-20 left-20 w-80 h-80 bg-blue-500/20 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-500/20 blur-[120px] rounded-full animate-pulse" />
+      {/* Glow Effects - Scaled for mobile */}
+      <div className="absolute inset-0 z-10 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-40 h-40 md:w-80 md:h-80 bg-blue-500/10 blur-[60px] md:blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-40 h-40 md:w-80 md:h-80 bg-purple-500/10 blur-[60px] md:blur-[120px] rounded-full animate-pulse" />
       </div>
 
-      {/* Floating Images */}
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/arduino/arduino-original.svg" alt="Arduino" width={80} height={80}
-        className="absolute top-[10%] left-[5%] animate-float opacity-70" />
-
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++" width={80} height={80}
-        className="absolute top-[10%] right-[5%] animate-float delay-200 opacity-70" />
-
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JS" width={80} height={80}
-        className="absolute bottom-[10%] left-[5%] animate-float delay-400 opacity-70" />
-
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="ESP32 / Python" width={80} height={80}
-        className="absolute bottom-[10%] right-[5%] animate-float delay-600 opacity-70" />
+      {/* Floating Images - Better desktop placement */}
+      <div className="hidden md:block absolute inset-0 z-20 pointer-events-none">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/arduino/arduino-original.svg" alt="Arduino"
+          className="absolute top-[25%] left-[12%] w-16 h-16 animate-float opacity-50" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++"
+          className="absolute top-[30%] right-[12%] w-16 h-16 animate-float delay-200 opacity-50" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JS"
+          className="absolute top-[55%] left-[15%] w-16 h-16 animate-float delay-400 opacity-50" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python"
+          className="absolute top-[60%] right-[15%] w-16 h-16 animate-float delay-600 opacity-50" />
+      </div>
 
       {/* Content */}
-      <div className="relative z-20 text-center px-6 max-w-5xl">
+      <div className="relative z-30 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
+
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-8 backdrop-blur-md">
+          <span className="w-2 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+          IoT Edge Club MITS
+        </div>
 
         {/* Title */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-4">
+        <h1 className="text-5xl md:text-5xl lg:text-8xl font-black text-white mb-6 leading-tight tracking-tight">
           IoT{" "}
-          <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent animate-pulse">
+          <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">
             EDGE
           </span>{" "}
           CLUB
         </h1>
 
         {/* Typing Tagline */}
-        <p className="text-xl md:text-2xl text-gray-300 h-10 mb-6">
-          {text}
-          <span className="animate-pulse">|</span>
-        </p>
+        <div className="h-10 mb-6 flex items-center justify-center">
+          <p className="text-xl md:text-2xl text-gray-300">
+            {text}<span className="animate-blink">|</span>
+          </p>
+        </div>
 
         {/* Description */}
-        <p className="text-gray-400 max-w-2xl mx-auto mb-10">
+        <p className="text-gray-400 max-w-2xl mx-auto mb-10 text-sm md:text-base leading-relaxed">
           Join a community of innovators building real-world IoT systems,
           participating in hackathons, workshops, and cutting-edge research
           in Edge AI, Smart Systems, and Automation.
         </p>
 
         {/* Buttons */}
-        <div className="flex justify-center gap-4 flex-wrap">
-          <button className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-full text-white font-semibold shadow-xl hover:scale-105 transition">
+        <div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
+          <button className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold shadow-lg shadow-blue-500/20 transition-all hover:scale-105 active:scale-95">
             🚀 Join Now
           </button>
-          <button className="px-8 py-3 border border-gray-500 hover:bg-gray-800 rounded-full text-gray-300 transition">
+          <button className="px-10 py-4 border border-white/10 bg-white/5 hover:bg-white/10 text-white rounded-2xl font-bold backdrop-blur-sm transition-all hover:scale-105 active:scale-95">
             Explore
           </button>
         </div>
 
-        {/* Floating Mission Card */}
-        <div className="mt-16 backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 shadow-xl animate-float-slow">
-          <h2 className="text-2xl text-blue-400 mb-3">Our Mission</h2>
-          <p className="text-gray-300">
-            Empowering students through hands-on IoT projects, workshops,
-            and innovation in Edge Computing, AI, and Smart Systems.
-          </p>
+        {/* Mission Card */}
+        <div className="mt-16 w-full max-w-lg mx-auto p-[1px] rounded-3xl bg-gradient-to-br from-white/10 to-transparent">
+          <div className="bg-slate-900/80 backdrop-blur-xl rounded-[23px] p-6 md:p-8 shadow-2xl border border-white/5">
+            <h2 className="text-xl md:text-2xl font-bold text-blue-400 mb-3">Our Mission</h2>
+            <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+              Empowering students through hands-on IoT projects, workshops,
+              and innovation in Edge Computing, AI, and Smart Systems.
+            </p>
+          </div>
         </div>
+
 
       </div>
 
       {/* CUSTOM ANIMATIONS */}
       <style jsx>{`
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        .animate-float-slow {
-          animation: float 8s ease-in-out infinite;
-        }
-        .delay-200 { animation-delay: 2s; }
-        .delay-400 { animation-delay: 4s; }
-        .delay-600 { animation-delay: 6s; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .delay-200 { animation-delay: 1.5s; }
+        .delay-400 { animation-delay: 3s; }
+        .delay-600 { animation-delay: 4.5s; }
+        .animate-blink { animation: blink 1s step-end infinite; }
 
         @keyframes float {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-          100% { transform: translateY(0px); }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
         }
       `}</style>
     </section>
